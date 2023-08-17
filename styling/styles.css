@@ -1,0 +1,294 @@
+/*
+* File: styles.css
+* Name: Karl Palmer
+* Date: 3/13/2019 (created)
+*/
+
+@font-face {
+  font-family: arcadeFont;
+  src: url(../fonts/PressStart2Font.ttf);
+}
+
+body
+{
+	margin: 0;
+	font-family: arcadeFont;
+	
+	background: #111;
+	color: white;
+	text-transform: uppercase;
+	overflow-x: hidden;
+}
+
+a
+{
+	text-decoration: none;
+	color: white;
+}
+
+footer a:hover
+{
+	text-decoration: underline;
+}
+
+h1,h2
+{
+	text-align: center;
+}
+
+.memoryimage
+{
+	width: 500px;
+	display: block;
+	margin: 0 auto;
+	padding: 5px;
+}
+
+#backgroundvideo
+{
+	background: url("../images/arcadestuff/spaceshooter.gif") no-repeat fixed center;
+	background-size: cover;
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -100;
+	opacity: .15;
+}
+
+#cpwdlogo
+{
+	display: block;
+	margin: 0 auto;
+	width: 800px;
+	image-rendering: pixelated;
+}
+
+table
+{
+	margin: 25px auto;
+	width: 80vw;
+	text-align: center;
+}
+
+th
+{
+	width: 33.33%;
+	font-weight: normal;
+	font-size: 30px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+td
+{
+	font-size: 20px;
+	text-align: center;
+	cursor: url('../images/cursors/cursor.png'), url('images/cursors/pointer.png'), auto);
+}
+
+tr
+{
+	cursor: auto;
+	text-align: center;
+	cursor: url('../images/cursors/cursor.png') 2 2, auto);
+	height: 49px;
+}
+
+tr.navlink:hover
+{
+	cursor: pointer;
+	cursor: url('../images/cursors/pointer.png') 2 2, pointer);
+	background-color: rgba(255,255,255,.05);;
+}
+
+tr.navlink:hover td
+{
+	font-size: 1.5em;
+}
+
+.highlight
+{
+	color: rgb(255, 66, 66);
+}
+
+@media only screen and (max-width: 1015px)
+{
+	body
+	{
+		padding: 5px;
+	}
+
+	#cpwdlogo
+	{
+		width: 100%;
+	}
+
+	table
+	{
+		width: 90vw;
+	}
+
+	th
+	{
+		font-size: 4vw;
+	}
+
+	td
+	{
+		font-size: 3vw;
+	}
+
+	footer
+	{
+		font-size: 3vw;
+	}
+
+	.container::before
+	{
+		background-size: 100% .3vw, .4vw 100%;
+	}
+}
+
+/* MOST OF THE CODE BELOW HERE WAS TAKEN FROM https://codepen.io/lbebber/pen/XJRdrV (but I modified it a bunch) */
+.screen
+{
+	padding: 25px;
+}
+
+#switch
+{
+  display: none;
+}
+
+.container
+{
+	width: 100vw;
+	text-align: center;
+	animation: flicker 4s infinite ease-in-out;
+	animation-delay: 3s;
+}
+
+.container::after
+{
+	content: " ";
+	display: block;
+	background: rgba(18, 16, 16, 0.1);
+	pointer-events: none;
+}
+
+.container::before
+{
+	content: " ";
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+	z-index: 2;
+	background-size: 100% 3px, 4px 100%;
+	pointer-events: none;
+}
+
+.container > .screen
+{
+	animation: turn-on 4s linear;
+	animation-fill-mode: forwards;
+}
+
+.overlay
+{
+	color: #00FF00;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 60px;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.container .overlay
+{
+	animation: overlay-anim 5s linear;
+	animation-fill-mode: forwards;
+}
+
+@keyframes flicker
+{
+	0%,2%,5%,15% {
+		opacity: 0.8;
+	}
+	1%,3%,6% {
+		opacity: 0.5;
+	}
+	4% {
+		opacity: 0.4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes turn-on
+{
+  0% {
+    transform: scale(1, 0.8) translate3d(0, 0, 0);
+    -webkit-filter: brightness(30);
+    filter: brightness(30);
+    opacity: 1;
+  }
+  3.5% {
+    transform: scale(1, 0.8) translate3d(0, 100%, 0);
+  }
+  3.6% {
+    transform: scale(1, 0.8) translate3d(0, -100%, 0);
+    opacity: 1;
+  }
+  9% {
+    transform: scale(1.3, 0.6) translate3d(0, 100%, 0);
+    -webkit-filter: brightness(30);
+    filter: brightness(30);
+    opacity: 0;
+  }
+  11% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    -webkit-filter: contrast(0) brightness(0);
+    filter: contrast(0) brightness(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    -webkit-filter: contrast(1) brightness(1.2) saturate(1.3);
+    filter: contrast(1) brightness(1.2) saturate(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes turn-off
+{
+  0% {
+    transform: scale(1, 1.3) translate3d(0, 0, 0);
+    -webkit-filter: brightness(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.3, 0.001) translate3d(0, 0, 0);
+    -webkit-filter: brightness(10);
+    filter: brightness(10);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: scale(0, 0.0001) translate3d(0, 0, 0);
+    -webkit-filter: brightness(50);
+    filter: brightness(50);
+  }
+}
+
+@keyframes overlay-anim {
+  0%,20%,100% {
+    visibility: hidden;
+  }
+  21% {
+    visibility: visible;
+  }
+}
